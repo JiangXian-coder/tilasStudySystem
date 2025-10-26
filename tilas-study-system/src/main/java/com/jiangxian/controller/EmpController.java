@@ -14,8 +14,8 @@ public class EmpController {
     @Autowired
     private EmpService empService;
     @GetMapping
-    public Result count(@RequestParam(defaultValue = "1") Integer page
-            ,@RequestParam(defaultValue = "10") Integer pageSize){
+    public Result queryFenYe(@RequestParam(defaultValue = "1") Integer page
+            , @RequestParam(defaultValue = "10") Integer pageSize){
         log.warn("页码：{},每页条数：{}",page,pageSize);
         ResultPage ResultPage = empService.list(page, pageSize);
         return Result.success(ResultPage);
