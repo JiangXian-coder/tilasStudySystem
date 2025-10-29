@@ -9,6 +9,7 @@ import com.jiangxian.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,11 +19,19 @@ public class EmpServiceImpl implements EmpService {
     private EmpMapper empMapper;
 
 
+//    @Override
+//    public ResultPage list(Integer page, Integer pageSize) {
+//        PageHelper.startPage(page, pageSize);
+//        List<Emp> empList = empMapper.list();
+//        Page<Emp> empPage=(Page<Emp>) empList;
+//        return new ResultPage(empPage.getTotal(),empPage.getResult());
+//    }
+
     @Override
-    public ResultPage list(Integer page, Integer pageSize) {
+    public ResultPage list(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
         PageHelper.startPage(page, pageSize);
-        List<Emp> empList = empMapper.list();
-        Page<Emp> empPage=(Page<Emp>) empList;
+        List<Emp> list = empMapper.list(name, gender, begin, end);
+        Page<Emp> empPage=(Page<Emp>) list;
         return new ResultPage(empPage.getTotal(),empPage.getResult());
     }
 }
