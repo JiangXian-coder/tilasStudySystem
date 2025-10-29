@@ -1,5 +1,6 @@
 package com.jiangxian.controller;
 
+import com.jiangxian.pojo.EmpQueryParams;
 import com.jiangxian.pojo.Result;
 import com.jiangxian.pojo.ResultPage;
 import com.jiangxian.service.EmpService;
@@ -17,13 +18,9 @@ public class EmpController {
     @Autowired
     private EmpService empService;
     @GetMapping
-    public Result queryFenYe(@RequestParam(defaultValue = "1") Integer page
-            , @RequestParam(defaultValue = "10") Integer pageSize,
-                             String name, Integer gender,
-                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
-                             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
-        log.warn("查询参数：{} {} {} {} {} {}",page,pageSize,name,gender,begin,end);
-        ResultPage ResultPage = empService.list(page, pageSize,name,gender,begin,end);
+    public Result queryFenYe(EmpQueryParams empQueryParams){
+        log.warn("查询参数：{} ",empQueryParams);
+        ResultPage ResultPage = empService.list(empQueryParams);
         return Result.success(ResultPage);
     }
 

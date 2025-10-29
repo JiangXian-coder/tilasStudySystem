@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jiangxian.mapper.EmpMapper;
 import com.jiangxian.pojo.Emp;
+import com.jiangxian.pojo.EmpQueryParams;
 import com.jiangxian.pojo.ResultPage;
 import com.jiangxian.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,10 @@ public class EmpServiceImpl implements EmpService {
 //    }
 
     @Override
-    public ResultPage list(Integer page, Integer pageSize, String name, Integer gender, LocalDate begin, LocalDate end) {
-        PageHelper.startPage(page, pageSize);
-        List<Emp> list = empMapper.list(name, gender, begin, end);
+    public ResultPage list(EmpQueryParams empQueryParams) {
+        PageHelper.startPage(empQueryParams.getPage(),
+                empQueryParams.getPageSize());
+        List<Emp> list = empMapper.list(empQueryParams);
         Page<Emp> empPage=(Page<Emp>) list;
         return new ResultPage(empPage.getTotal(),empPage.getResult());
     }

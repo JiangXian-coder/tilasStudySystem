@@ -1,6 +1,7 @@
 package com.jiangxian.mapper;
 
 import com.jiangxian.pojo.Emp;
+import com.jiangxian.pojo.EmpQueryParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,6 +12,5 @@ import java.util.List;
 public interface EmpMapper {
 
     //查询数据
-
-    public List<Emp> list(String name, Integer gender, LocalDate begin,LocalDate end);
+    public List<Emp> list(EmpQueryParams empQueryParams);
 }
