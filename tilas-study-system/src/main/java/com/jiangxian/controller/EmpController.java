@@ -1,5 +1,6 @@
 package com.jiangxian.controller;
 
+import com.jiangxian.pojo.Emp;
 import com.jiangxian.pojo.EmpQueryParams;
 import com.jiangxian.pojo.Result;
 import com.jiangxian.pojo.ResultPage;
@@ -22,6 +23,12 @@ public class EmpController {
         log.warn("查询参数：{} ",empQueryParams);
         ResultPage ResultPage = empService.list(empQueryParams);
         return Result.success(ResultPage);
+    }
+    @PostMapping
+    public Result save(@RequestBody Emp emp){
+        log.warn("保存的员工数据：{} ",emp);
+        empService.save(emp);
+        return Result.success();
     }
 
 }
