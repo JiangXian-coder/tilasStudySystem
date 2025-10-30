@@ -11,6 +11,7 @@ import com.jiangxian.pojo.ResultPage;
 import com.jiangxian.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
@@ -42,6 +43,9 @@ public class EmpServiceImpl implements EmpService {
         return new ResultPage(empPage.getTotal(), empPage.getResult());
     }
 
+
+    @Transactional(rollbackFor = Exception.class)//事务控制，两个成功操作之后才会提交，
+    // 否则回滚,添加属性保证发生任何异常都能回滚
     @Override
     public void save(Emp emp) {
         //设置员工的基本信息
