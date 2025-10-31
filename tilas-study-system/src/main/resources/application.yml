@@ -23,3 +23,9 @@ pagehelper:
 logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-shenzhen.aliyuncs.com
+    bucketName: tilas-study-jx
+    region: cn-shenzhen
