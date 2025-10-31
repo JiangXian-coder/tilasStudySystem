@@ -64,4 +64,10 @@ public class EmpServiceImpl implements EmpService {
             empExperMapper.insertBatch(exprList);
         }
     }
+
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        empMapper.deleteEmpByIds(ids);
+        empExperMapper.deleteEmpExperByIds(ids);
+    }
 }
