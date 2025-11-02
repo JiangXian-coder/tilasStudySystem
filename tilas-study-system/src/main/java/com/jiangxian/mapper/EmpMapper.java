@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -29,4 +30,8 @@ public interface EmpMapper {
     Emp getEmpAndExperById(Integer id);
 
     void updateById(Emp emp);
+
+    List<Map<String,Object>> getJobDataMap();
+
+    List<Map> getGenderData();
 }
