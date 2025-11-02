@@ -4,7 +4,6 @@ import com.jiangxian.pojo.Emp;
 import com.jiangxian.pojo.EmpQueryParams;
 import com.jiangxian.pojo.ResultPage;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -16,5 +15,9 @@ public interface EmpService {
     public void save(Emp emp);
 
     void deleteByIds(List<Integer> ids);
+
+    Emp getById(Integer id);
+
+    void updateEmp(Emp emp);
 }
 

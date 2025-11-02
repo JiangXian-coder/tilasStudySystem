@@ -5,9 +5,7 @@ import com.jiangxian.pojo.EmpQueryParams;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -27,4 +25,8 @@ public interface EmpMapper {
 
     //批量删除员工基本信息
     void deleteEmpByIds(List<Integer> ids);
+
+    Emp getEmpAndExperById(Integer id);
+
+    void updateById(Emp emp);
 }

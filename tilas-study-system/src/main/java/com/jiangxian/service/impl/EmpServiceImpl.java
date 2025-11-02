@@ -14,8 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -69,5 +72,29 @@ public class EmpServiceImpl implements EmpService {
     public void deleteByIds(List<Integer> ids) {
         empMapper.deleteEmpByIds(ids);
         empExperMapper.deleteEmpExperByIds(ids);
+    }
+
+    @Override
+    public Emp getById(Integer id) {
+        Emp empAndExperById = empMapper.getEmpAndExperById(id);
+        return empAndExperById;
+    }
+
+    @Transactional(rollbackFor = Exception.class )
+    @Override
+    public void updateEmp(Emp emp) {
+        //设置员工的更新时间
+        emp.setUpdateTime(LocalDateTime.now());
+        //更新员工基本信息
+        empMapper.updateById(emp);
+        //删除员工以前的经历
+        empExperMapper.deleteEmpExperByIds(Arrays.asList(emp.getId()));
+        //添加员工现在的经历
+        Integer empId = emp.getId();
+        List<EmpExpr> empExprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(empExprList)) {
+            empExprList.forEach(empExpr -> empExpr.setEmpId(empId));
+            empExperMapper.insertBatch(empExprList);
+        }
     }
 }
