@@ -5,6 +5,7 @@ import com.jiangxian.pojo.EmpQueryParams;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +35,7 @@ public interface EmpMapper {
     List<Map<String,Object>> getJobDataMap();
 
     List<Map> getGenderData();
+
+    @Select("select e.* from emp as e")
+    List<Emp> queryAllEmp();
 }

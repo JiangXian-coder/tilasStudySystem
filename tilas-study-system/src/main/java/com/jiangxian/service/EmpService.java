@@ -19,5 +19,7 @@ public interface EmpService {
     Emp getById(Integer id);
 
     void updateEmp(Emp emp);
+
+    List<Emp> queryAllEmp();
 }
 

@@ -46,12 +46,20 @@ public class EmpController {
         Emp emp = empService.getById(id);
         return Result.success(emp);
     }
+
     //更新员工信息
     @PutMapping
     public Result updateEmp(@RequestBody Emp emp) {
-        log.info("更新的员工:{}",emp.toString());
+        log.info("更新的员工:{}", emp.toString());
         empService.updateEmp(emp);
         return Result.success();
+    }
+
+    //查询所有员工
+    @GetMapping("/list")
+    public Result queryAllEmp() {
+        List<Emp> emps = empService.queryAllEmp();
+        return Result.success(emps);
     }
 
 }
