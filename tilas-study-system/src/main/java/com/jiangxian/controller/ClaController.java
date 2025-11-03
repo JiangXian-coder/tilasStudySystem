@@ -67,10 +67,20 @@ public class ClaController {
         Clazz clazz = claService.getClaById(id);
         return Result.success(clazz);
     }
+    //修改班级
+    @PutMapping
+    public Result updateCla(@RequestBody Clazz clazz){
+        log.info("修改班级:{}",clazz.toString());
+        claService.updateCla(clazz);
+        return Result.success();
+    }
+
     //查询所有的班级信息
     @GetMapping("/list")
     public Result getAllCla(){
         List<Clazz> allCla = claService.getAllCla();
         return Result.success(allCla);
     }
+    /*
+    * 写于2025.11.3，班级管理的功能全部开发完毕*/
 }
