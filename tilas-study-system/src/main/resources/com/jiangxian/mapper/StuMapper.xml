@@ -2,5 +2,91 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiangxian.mapper.StuMapper">
+    <select id="pageQuery" resultType="com.jiangxian.pojo.Student">
+        select s.*,c.name as clazz_name from student as s left join clazz as c on s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                and s.name like concat('%',#{name},'%')
+            </if>
+            <if test="degree != null">
+                and s.degree = #{degree}
+            </if>
+            <if test="clazzId != null">
+                and s.clazz_id = #{clazzId}
+            </if>
+        </where>
+    </select>
+<!--    删除学生-->
+    <delete id="deleteByIds">
+        delete
+        from student
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--    增加学生-->
+    <insert id="addStudent">
+        insert into student(name, no, gender, phone, id_card,
+                            is_college, address, degree, graduation_date,
+                            clazz_id, create_time, update_time)
+        values(#{name}, #{no}, #{gender}, #{phone}, #{idCard},
+               #{isCollege},#{address},#{degree},#{graduationDate},#{clazzId},
+              #{createTime},#{updateTime})
+    </insert>
+<!--    根据id查询学生-->
+    <select id="queryStuById" resultType="com.jiangxian.pojo.Student">
+        select s.*,z.name as clazz_name
+        from student as s
+                 left join clazz as z on s.clazz_id = z.id
+        where s.id = #{id}
+    </select>
+<!--    更新学生信息-->
+    <update id="updateStu">
+        update student
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="no != null">
+                no = #{no},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard},
+            </if>
+            <if test="isCollege != null">
+                is_college = #{isCollege},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="violationCount != null">
+                violation_count = #{violationCount},
+            </if>
+            <if test="violationScore != null">
+                violation_score = #{violationScore},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>

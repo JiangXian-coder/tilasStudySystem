@@ -9,4 +9,15 @@ import java.util.List;
 
 public interface StuService {
 
+    ResultPage pageQuery(StuQueryParams stuQueryParams);
+
+    void deleteByIds(List<Integer> ids);
+
+    void addStudent(Student student);
+
+    Student queryStuById(Integer id);
+
+    void updateStu(Student student);
+
+    void violationInfo(Integer id, Short score);
 }
