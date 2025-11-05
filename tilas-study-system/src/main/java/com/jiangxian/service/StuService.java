@@ -1,11 +1,9 @@
 package com.jiangxian.service;
 
-import com.jiangxian.pojo.ClaQueryParams;
-import com.jiangxian.pojo.ResultPage;
-import com.jiangxian.pojo.StuQueryParams;
-import com.jiangxian.pojo.Student;
+import com.jiangxian.pojo.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StuService {
 
@@ -20,4 +18,5 @@ public interface StuService {
     void updateStu(Student student);
 
     void violationInfo(Integer id, Short score);
+
 }

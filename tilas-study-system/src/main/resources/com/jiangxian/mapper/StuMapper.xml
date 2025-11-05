@@ -89,4 +89,28 @@
         where id = #{id}
     </update>
 
+<!--    统计学生学历数据图标-->
+    <select id="getStudentDegreeData" resultType="java.util.Map">
+        select (case s.degree
+                    when 1 then '初中'
+                    when 2 then '高中'
+                    when 3 then '大专'
+                    when 4 then '本科'
+                    when 5 then '硕士'
+                    when 6 then '博士' end )
+                   as name,
+               count(1) as value
+        from student as s
+        group by s.degree
+    </select>
+
+<!--    获取学生班级数据集合-->
+    <select id="getStudentClazzData" resultType="java.util.Map">
+        select z.name as clazzName, count(1) as count
+        from student as s left join clazz as z
+        on s.clazz_id = z.id
+        group by z.name
+        order by count desc
+    </select>
+
 </mapper>

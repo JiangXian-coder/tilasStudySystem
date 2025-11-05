@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface StuMapper {
@@ -40,4 +41,8 @@ public interface StuMapper {
      * @param student 学生对象
      */
     void updateStu(Student student);
+
+    List<Map> getStudentDegreeData();
+
+    List<Map<String, Object>> getStudentClazzData();
 }
